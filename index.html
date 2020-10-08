@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consignación 2.1</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+    <div id='app'>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <h3>Datos transacción</h3>
+                    <h5>Saldo</h5>
+                    <h5 class="text-muted" v-text="saldo"></h5>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="c" v-model="tipo">
+                        <label class="form-check-label" for="inlineRadio1">Consignación</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="r" v-model="tipo">
+                        <label class="form-check-label" for="inlineRadio2">Retiro</label>
+                    </div>
+                    <br><br>
+                    <label>Valor:</label>
+                    <input type="number"class="col-md-5"class="form control"placeholder="ingrese un valor" v-model="valor"><br><br>
+                    
+                    <input type="button"value="Procesar"class="btn btn-success" v-on:click="procesar">  
+                </div>     
+
+                <div class="col-md-6 col-xs-12">
+                    <h3>Información</h3>  
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr class="bg-dark text-white">
+                                <td>Tipo movimiento</td>
+                                <td>Valor</td>
+                                <td>Nuevo saldo</td>
+                                <td>Opciones</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(objeto,index) in arrayDatos" :key="`objeto-${index}`" v-bind:style="objeto.tipo=='Retiro'?'color:red':'color:green'">
+                                <td v-text="objeto.tipo"></td>
+                                <td v-text="objeto.valor"></td>
+                                <td v-text="objeto.saldo"></td>
+                                <td class="btn btn-danger btn-sm" @click="arraySplice(index, objeto)"><i class="material-icons">delete</i></td>
+                            </tr>
+                            <!-- <tr style="background-color: darkgray;">
+                                <td align="right"><strong>Total</strong></td>
+                                <td>{{total}}</td>                         
+                                <td colspan="2"> </td>                         
+                            </tr>               -->
+                        </tbody>
+                    </table>      
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="js/vue.js"></script> 
+<script src="js/sweetalert2.all.min.js"></script> 
+<script src="js/main.js"></script> 
+</html>
